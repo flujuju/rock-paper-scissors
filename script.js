@@ -3,8 +3,10 @@ console.log("Hello");
 
 // let computer choose its play, randomly
 const OPTIONS = ["rock", "paper", "scissors"];
+let computerSelection;
 let computerScore = 0;
 let playerScore = 0;
+let counter = 0;
 
 function getComputerChoice (arrayOfChoices) {
     let itemNumber = Math.floor(Math.random()* arrayOfChoices.length);
@@ -12,106 +14,188 @@ function getComputerChoice (arrayOfChoices) {
     return computerChoice;
 }
 
-// console.log(getComputerChoice(OPTIONS));
+//computerSelection = getComputerChoice(OPTIONS)
+//console.log(computerSelection);
 
 // prompt user to choose his play
 // verify that user choice is valid
-function getUserSelection() {
-    let userChoice;
-    let valid; 
 
     
-    while (!valid) {
-        if (userChoice !== "rock" && userChoice !== "paper" && userChoice !== "scissors"){
-            userChoice = prompt("Make your selection (rock, paper or scissors)");
-            userChoice = userChoice.toLowerCase();
-        }
-        
-        else {
-            valid = true;
-        }
-    }
+const divButtons = document.querySelector('.buttons')
 
-    return userChoice;
+const btnRock = document.querySelector('#rock');
+btnRock.addEventListener('click', () => {
+    playRound("rock");
+    console.log("rock");
+ });
+
+const btnPaper = document.querySelector('#paper');
+btnPaper.addEventListener('click', () => {
+    playRound('paper');
+});
+
+const btnScissors = document.querySelector('#scissors');
+btnScissors.addEventListener('click', () => {
+    playRound("scissors");
+});
+
+const divResult = document.querySelector('.result');
+const divScore = document.querySelector('.score');
+    
+   
+
     
     
-}
+    
 
 //console.log(getUserSelection());
 
 // define who won
-function playRound(computerSelection, playerSelection) {
+function playRound(playerSelection) {
+    let computerSelection = getComputerChoice(OPTIONS);
     switch(computerSelection) {
         case "rock":
             if(playerSelection == "rock") {
-                console.log("It's a draw");
+                divResult.textContent = "It's a draw!";
+                displayScore();
+                counter += 1;
+                if (counter == 5) {
+                    divButtons.removeChild(btnRock);
+                    divButtons.removeChild(btnPaper);
+                    divButtons.removeChild(btnScissors);
+                    divButtons.textContent="GAME OVER !";
+                }
+
             }
             else if (playerSelection == "paper") {
-                console.log("player wins !");
+                divResult.textContent = "player wins !";
                 playerScore += 1;
+                displayScore();
+                counter += 1;
+                if (counter == 5) {
+                    divButtons.removeChild(btnRock);
+                    divButtons.removeChild(btnPaper);
+                    divButtons.removeChild(btnScissors);
+                    divButtons.textContent="GAME OVER !";
+                }
             }
             else {
-                console.log("Computer wins !");
+                divResult.textContent="Computer wins !";
                 computerScore += 1;
+                displayScore();
+                counter += 1;
+                if (counter == 5) {
+                    divButtons.removeChild(btnRock);
+                    divButtons.removeChild(btnPaper);
+                    divButtons.removeChild(btnScissors);
+                    divButtons.textContent="GAME OVER !";
+                }
             }
             break;
 
         case "paper":
             if(playerSelection == "paper") {
-                console.log("It's a draw");
+                divResult.textContent = "It's a draw";
+                displayScore();
+                counter += 1;
+                if (counter == 5) {
+                    divButtons.removeChild(btnRock);
+                    divButtons.removeChild(btnPaper);
+                    divButtons.removeChild(btnScissors);
+                    divButtons.textContent="GAME OVER !";
+                }
             }
             else if (playerSelection == "scissors") {
-                console.log("player wins !");
+                divResult.textContent = "player wins !";
                 playerScore += 1;
+                displayScore();
+                counter += 1;
+                if (counter == 5) {
+                    divButtons.removeChild(btnRock);
+                    divButtons.removeChild(btnPaper);
+                    divButtons.removeChild(btnScissors);
+                    divButtons.textContent="GAME OVER !";
+                }
             }
 
             else {
-                console.log("Computer wins !");
+                divResult.textContent = "Computer wins !";
                 computerScore += 1;
+                displayScore();
+                counter += 1;
+                if (counter == 5) {
+                    divButtons.removeChild(btnRock);
+                    divButtons.removeChild(btnPaper);
+                    divButtons.removeChild(btnScissors);
+                    divButtons.textContent="GAME OVER !";
+                }
             }
             break;
 
         case "scissors":
             if(playerSelection == "scissors") {
-                console.log("It's a draw");
+                divResult.textContent = "It's a draw";
+                displayScore();
+                counter += 1;
+                if (counter == 5) {
+                    divButtons.removeChild(btnRock);
+                    divButtons.removeChild(btnPaper);
+                    divButtons.removeChild(btnScissors);
+                    divButtons.textContent="GAME OVER !";
+                }
             }
             else if (playerSelection == "rock") {
-                console.log("player wins !");
+                divResult.textContent = "player wins !";
                 playerScore += 1;
+                displayScore();
+                counter += 1;
+                if (counter == 5) {
+                    divButtons.removeChild(btnRock);
+                    divButtons.removeChild(btnPaper);
+                    divButtons.removeChild(btnScissors);
+                    divButtons.textContent="GAME OVER !";
+                }
             }
             else {
-                console.log("Computer wins !");
+                divResult.textContent = "Computer wins !";
                 computerScore += 1;
+                displayScore();
+                counter += 1;
+                if (counter == 5) {
+                    divButtons.removeChild(btnRock);
+                    divButtons.removeChild(btnPaper);
+                    divButtons.removeChild(btnScissors);
+                    divButtons.textContent="GAME OVER !";
+                }
             }
             break;
     }
 
 }
 
-function displayScore(playerScore, computerScore){
-    console.log(`SCORE - player : ${playerScore} // computer : ${computerScore}`);
+function displayScore(){
+    divScore.textContent = `SCORE - player : ${playerScore} // computer : ${computerScore}`;
 }
 
-function game(){
-    for (let i = 0; i < 5; i++){
-        let computerChoice = getComputerChoice(OPTIONS);
-        console.log(computerChoice);
-        let userSelection = getUserSelection();
-        playRound(computerChoice, userSelection);
-        displayScore(playerScore, computerScore);
+//function game(){
+//    for (let i = 0; i < 5; i++){
+//       let computerChoice = getComputerChoice(OPTIONS);      console.log(computerChoice);
+//        let userSelection = getUserSelection();
+//       playRound(computerChoice, userSelection);
+//        displayScore(playerScore, computerScore);
 
 
-    }
+//    }
 
-    console.log(`Game is finished, final score is :`);
-    displayScore(playerScore, computerScore);
+//    console.log(`Game is finished, final score is :`);
+//    displayScore(playerScore, computerScore);
 
 
     
 
-}
+//}
 
-game()
+//game()
 
 
 
